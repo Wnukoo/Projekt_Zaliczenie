@@ -69,7 +69,15 @@ namespace LibraryApp
         {
             _library.AddNewCopy("Wiedźmin", "Andrzej Sapkowski", "978-83-89011-67-4");
             _library.AddNewCopy("Pan Tadeusz", "Adam Mickiewicz", "978-83-240-3100-5");
+            _library.AddNewCopy("Lalka", "Bolesław Prus", "978-83-08-04201-0");
+            _library.AddNewCopy("Zbrodnia i kara", "Fiodor Dostojewski", "978-83-08-04202-7");
+            _library.AddNewCard("Robert Kubica");
+            _library.AddNewCard("Max Verstappen");
+            _library.AddNewCard("Lewis Hamilton");
+            _library.AddNewCard("Fernando Alonso");
             RefreshGrid();
+            RefreshCards();
+
         }
 
         // ========  ODŚWIEŻANIE  ========
@@ -86,9 +94,9 @@ namespace LibraryApp
             var id = textCopyId.Text.Trim().ToUpper();
             var card = comboCards.SelectedItem as LibraryCard;
 
-            if (id.Length != 8)
+            if (id.Length != 4)
             {
-                MessageBox.Show("Podaj poprawny 8-znakowy Copy ID.");
+                MessageBox.Show("Podaj poprawny 4-znakowy Copy ID.");
                 return;
             }
             if (card is null)
