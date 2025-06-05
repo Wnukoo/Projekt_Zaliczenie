@@ -154,13 +154,29 @@ namespace LibraryApp
         // ========  ZAPIS / ODCZYT  ========
         private void buttonSave_Click(object? sender, EventArgs e)
         {
-            using var sfd = new SaveFileDialog { Filter = "JSON files (*.json)|*.json" };
-            if (sfd.ShowDialog() == DialogResult.OK) _library.Save(sfd.FileName);
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            using var sfd = new SaveFileDialog
+            {
+                Filter = "JSON files (*.json)|*.json",
+                InitialDirectory = desktopPath
+            };
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                _library.Save(sfd.FileName);
+            }
         }
 
         private void buttonLoad_Click(object? sender, EventArgs e)
         {
-            using var ofd = new OpenFileDialog { Filter = "JSON files (*.json)|*.json" };
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            using var ofd = new OpenFileDialog
+            {
+                Filter = "JSON files (*.json)|*.json",
+                InitialDirectory = desktopPath
+            };
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 _library.Load(ofd.FileName);
