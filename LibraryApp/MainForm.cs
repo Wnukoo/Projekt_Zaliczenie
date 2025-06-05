@@ -26,7 +26,7 @@ namespace LibraryApp
 
             dataGridViewBooks.Columns.Add(new DataGridViewTextBoxColumn
             {
-                HeaderText = "Copy ID",
+                HeaderText = "Book ID",
                 DataPropertyName = "CopyId"
             });
             dataGridViewBooks.Columns.Add(new DataGridViewTextBoxColumn
@@ -41,7 +41,7 @@ namespace LibraryApp
             });
             dataGridViewBooks.Columns.Add(new DataGridViewTextBoxColumn
             {
-                HeaderText = "ISBN",
+                HeaderText = "Number ISBN",
                 DataPropertyName = "Isbn"
             });
             dataGridViewBooks.Columns.Add(new DataGridViewCheckBoxColumn
@@ -111,7 +111,7 @@ namespace LibraryApp
         {
             var id = textCopyId.Text.Trim().ToUpper();
             if (_library.RemoveCopy(id)) RefreshGrid();
-            else MessageBox.Show("Nie znaleziono kopii.");
+            else MessageBox.Show("Nie znaleziono ksiązki.");
         }
 
         // ========  DODAWANIE KOPII  ========
@@ -121,7 +121,7 @@ namespace LibraryApp
                 string.IsNullOrWhiteSpace(textNewAuthor.Text) ||
                 string.IsNullOrWhiteSpace(textNewIsbn.Text))
             {
-                MessageBox.Show("Wypełnij tytuł, autora i ISBN.");
+                MessageBox.Show("Wypełnij tytuł, autora i numer ISBN.");
                 return;
             }
 
