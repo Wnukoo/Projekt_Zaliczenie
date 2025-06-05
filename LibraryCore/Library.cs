@@ -6,13 +6,9 @@ using System.Text.Json;
 
 namespace LibraryCore
 {
-    /// <summary>
-    /// Centralny „magazyn” – przechowuje zarówno kopie książek,
-    /// jak i karty biblioteczne (dla studentów).
-    /// </summary>
+
     public class Library
     {
-        // ========  KOPIE  ========
         private readonly List<BookCopy> _copies = new();
         public IEnumerable<BookCopy> Copies => _copies;
 
@@ -32,7 +28,6 @@ namespace LibraryCore
         public void Return(string copyId)
             => (FindCopy(copyId) ?? throw new ArgumentException("Nie znaleziono kopii.")).Return();
 
-        // ========  KARTY  ========
         private readonly List<LibraryCard> _cards = new();
         public IEnumerable<LibraryCard> Cards => _cards;
 
@@ -49,7 +44,6 @@ namespace LibraryCore
         public bool RemoveCard(Guid id) => _cards.RemoveAll(c => c.CardId == id) > 0;
         public LibraryCard? FindCard(Guid id) => _cards.FirstOrDefault(c => c.CardId == id);
 
-        // ========  SERIALIZACJA  ========
         private record LibraryState(List<BookCopy> Copies, List<LibraryCard> Cards);
 
         private static readonly JsonSerializerOptions _jsonOptions = new() { WriteIndented = true };
@@ -72,12 +66,11 @@ namespace LibraryCore
             _copies.AddRange(state.Copies);
             _cards.AddRange(state.Cards);
 
-            // Spięcie referencji: BorrowedBy musi wskazywać na instancję z _cards
             foreach (var copy in _copies.Where(c => c.BorrowedBy is not null))
             {
                 var matched = _cards.FirstOrDefault(k => k.CardId == copy.BorrowedBy!.CardId);
                 if (matched is not null) copy.BorrowedBy = matched;
-                else _cards.Add(copy.BorrowedBy!); // karta istniała tylko w kopii
+                else _cards.Add(copy.BorrowedBy!); 
             }
         }
     }

@@ -3,9 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace LibraryCore
 {
-    /// <summary>
-    /// Abstrakcyjny element biblioteczny.
-    /// </summary>
+
     public abstract class LibraryItem
     {
         [JsonInclude] public string Title { get; private set; }
@@ -17,7 +15,7 @@ namespace LibraryCore
             Author = author;
         }
 
-        // Konstruktor dla serializatora
+
         [JsonConstructor]
         private LibraryItem() { Title = Author = string.Empty; }
 

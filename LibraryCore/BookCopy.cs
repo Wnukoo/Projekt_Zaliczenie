@@ -21,12 +21,10 @@ namespace LibraryCore
         [JsonInclude] public bool IsBorrowed { get; set; }
         [JsonInclude] public LibraryCard? BorrowedBy { get; set; }
 
-        // Wygodna właściwość do wyświetlania w GUI (nie serializujemy, to pochodna).
         [JsonIgnore] public string BorrowerName => BorrowedBy?.StudentName ?? string.Empty;
 
         public BookCopy(string title, string author, string isbn) : base(title, author, isbn) { }
 
-        // Konstruktor używany przez System.Text.Json
         [JsonConstructor]
         public BookCopy(string title, string author, string isbn, string copyId, bool isBorrowed, LibraryCard? borrowedBy)
             : base(title, author, isbn)
@@ -36,7 +34,6 @@ namespace LibraryCore
             BorrowedBy = borrowedBy;
         }
 
-        #region ILendable
         public void Borrow(LibraryCard card)
         {
             if (IsBorrowed)
@@ -52,7 +49,7 @@ namespace LibraryCore
             IsBorrowed = false;
             BorrowedBy = null;
         }
-        #endregion
+        
 
         public override string Info() => base.Info() + $" | CopyID: {CopyId} | Borrowed: {IsBorrowed}";
     }
