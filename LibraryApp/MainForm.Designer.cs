@@ -223,6 +223,7 @@
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Library Manager";
+            Load += MainForm_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewBooks).EndInit();
             groupBorrow.ResumeLayout(false);
             groupBorrow.PerformLayout();
