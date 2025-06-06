@@ -23,7 +23,7 @@ namespace LibraryCore
         }
 
         // Właściwość CopyId - identyfikator kopii, domyślnie generowany
-        [JsonInclude] public string CopyId { get; set; } = GenerateId();
+        [JsonInclude] public string CopyId { get; } = GenerateId();
 
         // Stan wypożyczenia - czy jest wypożyczona
         [JsonInclude] public bool IsBorrowed { get; set; }
